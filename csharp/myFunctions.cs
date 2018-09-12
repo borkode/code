@@ -5,12 +5,16 @@ namespace borkode{
     {
 	public static void Main(){
 	Console.WriteLine("Select a program to run:");
-	Console.WriteLine("pythagorean");
+	Console.WriteLine("'pythagorean'");
 		var lineRead = Console.ReadLine();
 		var func = new Functions();
 		if(lineRead=="pythagorean")
 		{
 			func.Pythagorean();
+		}
+		else
+		{
+			Console.WriteLine("Not a program!");
 		}
 	}
 	public class Functions{
@@ -28,6 +32,7 @@ namespace borkode{
             Console.WriteLine("Final answer for 'c' is {0}.",Math.Sqrt(Math.Pow(ad,2)+Math.Pow(bd,2)));
         
     }
+		
 	}
 	}
 }
