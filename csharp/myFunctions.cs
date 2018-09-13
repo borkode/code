@@ -14,8 +14,13 @@ namespace borkode{
 		}
 		else
 		{
+			if(lineRead=="")
+			{
+				
+			}else{
 			Console.WriteLine("Not a program!");
-		}
+			}
+			}
 	}
 	public class Functions{
         public void Pythagorean()
