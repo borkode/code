@@ -1,5 +1,5 @@
 setInterval(function(){
-var c = document.getElementById("myCanvas");
+var c = document.getElementById("clock");
 var ctx = c.getContext("2d");
 ctx.beginPath();
 if(m>985){
