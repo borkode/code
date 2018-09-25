@@ -21,7 +21,7 @@ ctx.stroke();*/
 var d = new Date().getSeconds()+new Date().getMilliseconds()/1000;
 var m = new Date().getMilliseconds();
 var n = new Date().getMinutes()+new Date().getSeconds()/60;
-var h = new Date().getHours()+new Date*().getMinutes()/60;
+var h = new Date().getHours()+new Date().getMinutes()/60;
 ctx.beginPath();
 ctx.lineWidth=13
 ctx.strokeStyle='#333'
