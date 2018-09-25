@@ -63,8 +63,4 @@ ctx.arc(200-x,200-x,90,0,2*Math.PI);
 ctx.moveTo(300-x,200-x);
 ctx.arc(200-x,200-x,100,0,2*Math.PI);
 ctx.stroke();
-// Update Title
-  var title = document.getElementById('updatetitle');
-  var da = new Date();
-  title.innerHTML=da.getHours().toString+":"+da.getMinutes().toString()+":"+da.getSeconds().toString()+" - Online Clock"
 },1);
