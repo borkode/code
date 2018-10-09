@@ -7,6 +7,7 @@ local position3 = UDim2.new(0,fromX-toX/2,0,fromY-toY/2)
 local Frame = Instance.new('Frame',parent)
 Frame.Position = position3
 Frame.Rotation = rotation
+Frame.Name = 'Line'
 -- get line length
 local x = (toX-fromX)*(toX-fromX)
 local y = (toY-fromY)*(toY-fromY)
