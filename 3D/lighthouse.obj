@@ -1,7 +1,7 @@
 # Blender v2.79 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib lighthouse.mtl
-o lighthouse_Cube
+o Lighthouse_borkode
 v -1.396802 0.000000 -0.221232
 v 0.221231 0.000000 -1.396802
 v 1.396802 0.000000 0.221232
