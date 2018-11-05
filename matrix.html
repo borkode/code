@@ -1,0 +1,15 @@
+<html>
+<script>
+var i = 0;
+var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM[]/`~1234567890!@#$%^&*()_+-=:"<>'.split("");
+setInterval(function(){
+document.write(str[Math.round(Math.random()*str.length)]);
+i += 1;
+if(i==Math.floor(Math.random()*50) || i>50){
+document.write(' <b>END</b><br>')
+document.body.scrollTop = document.body.scrollHeight+50
+i = 0
+}
+},1);
+</script>
+</html>
