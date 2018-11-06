@@ -5,7 +5,7 @@ var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'.split
 var sele = "";
 setInterval(function(){
 i += 1;
-sele = sele +str[Math.round(Math.random()*61)]
+sele = sele+Math.round(Math.random())
 document.write(sele+"<br>")
 document.body.scrollTop = document.body.scrollHeight+50
 document.body.scrollLeft = document.body.scrollWidth+50;
