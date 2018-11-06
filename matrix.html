@@ -7,11 +7,8 @@ setInterval(function(){
 i += 1;
 sele = sele +str[Math.round(Math.random()*61)]
 document.write(sele+"<br>")
-if(/*i==Math.floor(Math.random()*50) || */i>100){
-  sele = "";
-i = 0
-}
 document.body.scrollTop = document.body.scrollHeight+50
+document.body.scrollLeft = document.body.scrollWidth+50;
 },0.1);
 </script>
 </html>
