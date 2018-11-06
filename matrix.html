@@ -1,17 +1,17 @@
 <html>
 <script>
 var i = 0;
-var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'.split("");
-var sele "";
+var str = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'.split("");
+var sele = "";
 setInterval(function(){
 i += 1;
-  sele = sele +str[Math.round(Math.random()*str.length)]
-if(i==Math.floor(Math.random()*50) || i>50){
-document.write(sele+' <b>END</b><br>')
+sele = sele +str[Math.round(Math.random()*61)]
+document.write(sele+"<br>")
+if(/*i==Math.floor(Math.random()*50) || */i>50){
   sele = "";
 i = 0
 }
 document.body.scrollTop = document.body.scrollHeight+50
-},1);
+},0.1);
 </script>
 </html>
