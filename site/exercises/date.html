@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="demo"></p>
+On this date, any computer running a 32-bit OS will have their date set back to
+<p id='demo2'></p>
+This will be a huge issue since this can mess up entire companies if their computers run 32-bit.<br><br>We currently have <b id='demo3'>0</b> days until this will happen.
+<p>However, 64-bit processors have a lot of time until this will happen.</p>
+<p>We currently have <b id='demo4'>0</b> days until those processors will bug. That's a lot of time.</p>
+<script>
+    var d = new Date();
+    d.setTime(2147483647000);
+    document.getElementById("demo").innerHTML = d;
+    d.setTime(-2147483647000);
+    document.getElementById('demo2').innerHTML=d;
+    setInterval(function(){
+    var d = new Date();
+    var e = 2147483647000
+    var c = Date.parse(d)
+    var b = Math.floor((e-c)/1000/60/60/24)
+    document.getElementById('demo3').innerHTML=b
+    var d = new Date();
+    var e = Math.pow(2,63)-1
+    var c = Date.parse(d)
+    var b = Math.floor((e-c)/1000/60/60/24)
+    document.getElementById('demo4').innerHTML=b
+    },1);
+</script>
+</body>
+</html>
