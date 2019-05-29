@@ -97,6 +97,22 @@ class StarGame {
         };
         return GO;
     };
+    
+    Circle(radius) {
+        let GO = new GameObject();
+        GO.Circle = {};
+        GO.Circle.Radius = radius;
+        GO.RenderParams = GO.Circle.Radius;
+        GO.Render = (radius, cameraPos, obj) => {
+            this.ctx.save();
+            this.ctx.translate(-cameraPos.x-obj.Transform.Position.x,-cameraPos.y-obj.Transform.Position.y);
+            ctx.rotate(obj.Transform.Rotation * Math.PI / 180);
+            this.ctx.beginPath();
+                this.ctx.arc(cameraPos.x+obj.Transform.Position.x,cameraPos.y+obj.Transform.Position.y,radius,0,2*Math.PI);
+            this.ctx.stroke();
+            this.ctx.restore();
+        };
+    };
 
     Curve(root, anchor1, anchor2, end = undefined) {
         let GO = new GameObject();
