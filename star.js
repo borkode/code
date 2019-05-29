@@ -88,7 +88,7 @@ class StarGame {
             fjson.pointB.y+=(cameraPos.y+obj.Transform.Position.y);
             this.ctx.save();
             this.ctx.translate((Math.max(fjson.pointA.x,fjson.pointB.x)-(fjson.pointB.x-fjson.pointA.x)/2),(Math.max(fjson.pointA.y,fjson.pointB.y)-(fjson.pointB.y-fjson.pointA.y)/2));
-            this.ctx.rotate(obj.Rotation||0 * Math.PI / 180);
+            this.ctx.rotate((obj.Transform.Rotation||0) * Math.PI / 180);
             this.ctx.beginPath();
                 this.ctx.moveTo(-(fjson.pointB.x-fjson.pointA.x)/2,-(fjson.pointB.y-fjson.pointA.y)/2);
                 this.ctx.lineTo((fjson.pointB.x-fjson.pointA.x)/2,(fjson.pointB.y-fjson.pointA.y)/2);
