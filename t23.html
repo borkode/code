@@ -10,9 +10,14 @@ let f = 0;
 let fr = 0;
 let ta = 0;
 let c = document.getElementById(star.cId);
+let cc = Math.floor(Math.random()*16+100);
+c.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
 c.onmousedown = (e)=>{ta+=-1000};
 let balloons = [];
 let riseSpeeds = [];
+let losses = 0;
 setInterval(() => {
 	line.Transform.Rotation=Math.sin(fr)*25+ta/2.5;
 	lin2.Transform.Rotation=Math.sin(fr)*25+ta/2.5;
@@ -23,12 +28,14 @@ setInterval(() => {
         if(cb.Transform.Position.y <= -15) {
         	cb.Delete();
             delete balloons[balloons.indexOf(cb)];
+            delete riseSpeeds[balloons.indexOf(cb)];
+            losses++;
         }
 	});
-    f = (f+1)%Math.floor(Math.random()*8+100);
+    f = (f+1)%cc;
     if(f == 1) {
-    	let balloon = star.Line(new Vector2(-15,0), new Vector2(15,0));
-        balloon.Transform.Rotation = Math.floor(Math.random()*360);
+    	cc = Math.floor(Math.random()*150+100);
+    	let balloon = star.Circle(15);
         balloon.Transform.Position = new Vector2(star.MainCamera.viewportSize.x/10+Math.random()*star.MainCamera.viewportSize.x*0.8,star.MainCamera.viewportSize.y+15);
         riseSpeeds.push(0.25 + Math.random()*3/4);
         balloons.push(balloon);
