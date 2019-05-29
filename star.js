@@ -112,6 +112,7 @@ class StarGame {
             this.ctx.stroke();
             this.ctx.restore();
         };
+        return GO;
     };
 
     Curve(root, anchor1, anchor2, end = undefined) {
