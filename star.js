@@ -108,7 +108,7 @@ class StarGame {
             this.ctx.translate(-cameraPos.x-obj.Transform.Position.x,-cameraPos.y-obj.Transform.Position.y);
             this.ctx.rotate(obj.Transform.Rotation * Math.PI / 180);
             this.ctx.beginPath();
-                this.ctx.arc(cameraPos.x+obj.Transform.Position.x,cameraPos.y+obj.Transform.Position.y,radius,0,2*Math.PI);
+                this.ctx.arc(2*(cameraPos.x+obj.Transform.Position.x),2*(cameraPos.y+obj.Transform.Position.y),radius,0,2*Math.PI);
             this.ctx.stroke();
             this.ctx.restore();
         };
