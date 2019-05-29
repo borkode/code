@@ -1,0 +1,16 @@
+<canvas id="StarGame" style="width:100%;height:100%;position:absolute;top:0;left:0;" style="cursor:none;"></canvas>
+
+<script src="https://borkode.github.io/code/star.js"></script>
+<script>
+let star = new StarGame();
+star.Set({"resolution":[900,900],"drawDefault":{"lineWidth":1}}).Initialize();
+let line = star.Line(new Vector2(-7.5,0), new Vector2(7.5,0));
+let lin2 = star.Line(new Vector2(0,-7.5), new Vector2(0,7.5));
+setInterval(() => {
+	line.Transform.Rotation+=1;
+	lin2.Transform.Rotation+=1;
+	line.Transform.Position = star.Input.Mouse.Transform.Position;
+	lin2.Transform.Position = star.Input.Mouse.Transform.Position;
+	star.MainCamera.Display();
+},10);
+</script>
