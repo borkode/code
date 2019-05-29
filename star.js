@@ -106,7 +106,7 @@ class StarGame {
         GO.Render = (radius, cameraPos, obj) => {
             this.ctx.save();
             this.ctx.translate(-cameraPos.x-obj.Transform.Position.x,-cameraPos.y-obj.Transform.Position.y);
-            ctx.rotate(obj.Transform.Rotation * Math.PI / 180);
+            this.ctx.rotate(obj.Transform.Rotation * Math.PI / 180);
             this.ctx.beginPath();
                 this.ctx.arc(cameraPos.x+obj.Transform.Position.x,cameraPos.y+obj.Transform.Position.y,radius,0,2*Math.PI);
             this.ctx.stroke();
