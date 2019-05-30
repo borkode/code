@@ -5,11 +5,13 @@ let StarData = {
     "Input":{
         "KeysDown":[],
         "MouseButtons":[]
-    }
+    },
+    "StarObject":undefined
 };
 
 class StarGame {
     constructor(canvasId = "StarGame") {
+        StarData.StarObject = this;
         this.cId = canvasId;
         this.ctx = document.getElementById(canvasId).getContext("2d");
         this.Colors = {
@@ -22,7 +24,8 @@ class StarGame {
             "Mouse": {
                 "Transform": {
                     "Position": new Vector2(0, 0)
-                }
+                },
+                "Pressed":false
             },
             "Keyboard": {
                 "KeyDown": (keyId) => {
@@ -32,6 +35,12 @@ class StarGame {
         };
         document.getElementById(canvasId).onmousemove = (e) => {
             this.Input.Mouse.Transform.Position = new Vector2(Math.round(e.clientX - document.getElementById(canvasId).getBoundingClientRect().x), Math.round(e.clientY - document.getElementById(canvasId).getBoundingClientRect().y));
+        };
+        document.getElementById(canvasId).onmousedown = (e=undefined) => {
+            this.Input.Mouse.Pressed = true;
+        };
+        document.getElementById(canvasId).onmouseup = (e=undefined) => {
+            this.Input.Mouse.Pressed = false;
         };
         document.onkeydown = (event) => {
             if (StarData.Input.KeysDown.indexOf(event.key.toLowerCase()) == -1)
@@ -98,18 +107,24 @@ class StarGame {
         return GO;
     };
     
-    Circle(radius) {
+    Circle(radius, fill=true) {
         let GO = new GameObject();
         GO.Circle = {};
         GO.Circle.Radius = radius;
-        GO.RenderParams = GO.Circle.Radius;
-        GO.Render = (radius, cameraPos, obj) => {
+        GO.RenderParams = [GO.Circle.Radius, fill];
+        GO.Render = (array, cameraPos, obj) => {
+            let radius = array[0];
             this.ctx.save();
             this.ctx.translate(-cameraPos.x-obj.Transform.Position.x,-cameraPos.y-obj.Transform.Position.y);
             this.ctx.rotate(obj.Transform.Rotation * Math.PI / 180);
+            this.ctx.restore();
+            this.ctx.save();
+            this.ctx.transform(obj.Transform.Scale.x, 0, 0, obj.Transform.Scale.y, 0, 0);
             this.ctx.beginPath();
+                this.ctx.fillStyle = obj.Color;
+                this.ctx.strokeStyle = obj.Color;
                 this.ctx.arc(cameraPos.x+obj.Transform.Position.x,cameraPos.y+obj.Transform.Position.y,radius,0,2*Math.PI);
-            this.ctx.stroke();
+            array[1]?this.ctx.fill():this.ctx.stroke();
             this.ctx.restore();
         };
         return GO;
@@ -130,6 +145,26 @@ class StarGame {
         this.ctx.stroke();
         };
         return GO;
+    };
+
+    Image(src, size) {
+        let GO = new GameObject();
+        GO.Image = {};
+        GO.Image.Source = src;
+        GO.Image.Size = size;
+        GO.Image.ImageObject = new Image(size.x,size.y);
+        GO.Image.ImageObject.src = src;
+        GO.RenderParams = GO.Image.ImageObject;
+        GO.Render = (ImageObject, cameraPos, obj) => {
+            this.ctx.save();
+            this.ctx.translate(-obj.Transform.Position.x-cameraPos.x,-obj.Transform.Position.y-cameraPos.y);
+            this.ctx.rotate(obj.Transform.Rotation);
+            this.ctx.translate(obj.Transform.Scale.x,0,0,obj.Transform.Scale.y,0,0);
+            this.ctx.beginPath();
+                this.ctx.drawImage(ImageObject,obj.Transform.Position.x+cameraPos.x,obj.Transform.Position.y+cameraPos.y);
+            this.ctx.stroke();
+            this.ctx.restore();
+        };
     };
 };
 
@@ -168,7 +203,16 @@ class Camera {
                     break;
             };
         });
-        Objects.Get().forEach((object) => {
+
+        Objects.Get().sort((a,b) => {
+            if(a.Transform.zIndex == b.Transform.zIndex)
+                return 0;
+            if(a.Transform.zIndex < b.Transform.zIndex)
+                return -1;
+            if(a.Transform.zIndex > b.Transform.zIndex)
+                return 1;
+        }).reverse()
+        .forEach((object) => {
             object.Render(object.RenderParams, this.GameObject.Transform.Position, object);
         });
     };
@@ -186,9 +230,12 @@ class GameObject {
     constructor() {
         this.ObjectType;
         this.Name = "Object";
+        this.Color = "#000000";
         this.Transform = {
             "Position": new Vector2(0, 0),
             "Rotation": 0,
+            "Scale": new Vector2(1, 1),
+            "zIndex":0,
             "GameObject": this,
             "PointTowards": (p) => {
                 let newRotation = Math.atan(
@@ -204,7 +251,7 @@ class GameObject {
     };
 
     Delete() {
-        delete StarData.GameObjects[StarData.GameObjects.indexOf(this)];
+        StarData.GameObjects.splice(StarData.GameObjects.indexOf(this),1);
         delete this;
     };
 
