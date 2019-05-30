@@ -1,47 +1,4 @@
 <canvas id="StarGame" style="width:100%;height:100%;position:absolute;top:0;left:0;cursor:none;"></canvas>
 
 <script src="https://borkode.github.io/code/star.js"></script>
-<script>
-let star = new StarGame();
-star.Set({"resolution":"auto"}).Initialize();
-let line = star.Line(new Vector2(-7.5,0), new Vector2(7.5,0));
-let lin2 = star.Line(new Vector2(0,-7.5), new Vector2(0,7.5));
-let f = 0;
-let fr = 0;
-let ta = 0;
-let c = document.getElementById(star.cId);
-let cc = Math.floor(Math.random()*16+100);
-c.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-c.onmousedown = (e)=>{ta+=-1000};
-let balloons = [];
-let riseSpeeds = [];
-let losses = 0;
-setInterval(() => {
-	line.Transform.Rotation=Math.sin(fr)*25+ta/2.5;
-	lin2.Transform.Rotation=Math.sin(fr)*25+ta/2.5;
-	line.Transform.Position = star.Input.Mouse.Transform.Position;
-	lin2.Transform.Position = star.Input.Mouse.Transform.Position;
-    balloons.forEach((cb) => {
-    	cb.Transform.Position.y-=riseSpeeds[balloons.indexOf(cb)];
-        if(cb.Transform.Position.y <= -15) {
-        	cb.Delete();
-            delete balloons[balloons.indexOf(cb)];
-            delete riseSpeeds[balloons.indexOf(cb)];
-            losses++;
-        }
-	});
-    f = (f+1)%cc;
-    if(f == 1) {
-    	cc = Math.floor(Math.random()*150+100);
-    	let balloon = star.Circle(15);
-        balloon.Transform.Position = new Vector2(star.MainCamera.viewportSize.x/10+Math.random()*star.MainCamera.viewportSize.x*0.8,star.MainCamera.viewportSize.y+15);
-        riseSpeeds.push(0.25 + Math.random()*3/4);
-        balloons.push(balloon);
-    }
-	star.MainCamera.Display();
-    fr+=Math.PI/100;
-    ta*=0.975;
-},10);
-</script>
+<script src="t23.js"></script>
