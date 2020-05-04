@@ -1,0 +1,26 @@
+<html>
+<body>
+My Lua library
+<hr>
+Select a file to view:<br>
+<form>
+<input type='radio' id='point' value='/point.lua'>point.lua<br>
+<input type='radio' id='cam_move' value = '/cam_move.lua'>cam_move.lua<br>
+</form>
+<hr>
+<iframe id='iframe' src=''>
+</body>
+<script>
+var files = ['point','cam_move'];
+var array = ['point.lua','cam_move.lua'];
+document.getElementById('point').checked = true;
+setInterval(function(){
+var i = 0; 
+for(i++;i<=files.length;){
+if(files[i].checked == true){
+document.getElementById('iframe').setAttribute('src',array[i]);
+}
+}
+},1);
+</script>
+</html>
